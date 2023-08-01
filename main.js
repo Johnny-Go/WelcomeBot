@@ -19,10 +19,15 @@ client.on('ready', () => {
 
 client.on('guildMemberAdd', member =>{
     console.log(`Sending Welcome message for ${member.displayName}`);
-    const guild = client.guilds.cache.get('1114247738125729812');
-    const channel = guild.channels.cache.find(ch => ch.id === '1114247738675175446');
-    channel.send('https://tenor.com/view/simpson-gif-25340727')
-        .catch(e => console.log(e));
+
+    try {
+        const guild = client.guilds.cache.get(process.env.GUILD);
+        const channel = guild.channels.cache.find(ch => ch.id === process.env.WELCOME_CHANNEL);
+        channel.send('https://tenor.com/view/simpson-gif-25340727');
+    }
+    catch(e) {
+        console.log(e);
+    }
 })
 
 // Authenticate
